@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&display=swap">
 <style>
-/* Layout: one trattoria-style invitation card (gingham band, wine ground, gold rules) centered on a dark wine page; the ask, the mystery reveal and the dress code swap or stack inside it. */
+/* Layout: one trattoria-style invitation card (gingham band, wine ground, gold rules) centered on a dark wine page; the ask, the mystery reveal and the dress code swap or stack inside it. Cats everywhere. */
 :root {
   --bg: #1b0709;
   --glow: rgba(224, 181, 106, 0.16);
@@ -21,6 +21,12 @@
   --gold-ink: #2a0d12;
   --check-red: #b3262f;
   --check-cream: #f6ead7;
+  --fur: #f29a3b;
+  --fur-dark: #cf7420;
+  --belly: #fbe7c6;
+  --pink: #f4a3b5;
+  --tongue: #ee6a88;
+  --ink: #1b0709;
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: dark;
@@ -66,7 +72,7 @@ body {
     linear-gradient(rgba(179, 38, 47, 0.55) 50%, transparent 50%);
   background-size: 18px 18px;
 }
-.inner { padding: 32px 24px 36px; display: grid; gap: 28px; min-width: 0; }
+.inner { padding: 28px 24px 36px; display: grid; gap: 28px; min-width: 0; }
 .step { display: grid; gap: 14px; justify-items: center; text-align: center; min-width: 0; }
 
 .eyebrow {
@@ -167,7 +173,7 @@ p { margin: 0; text-wrap: pretty; }
 
 /* dress code */
 .dress { display: grid; gap: 18px; border-top: 1px solid var(--card-edge); padding-top: 28px; }
-.dress .head { display: grid; gap: 8px; justify-items: center; text-align: center; }
+.dress .head { display: grid; gap: 10px; justify-items: center; text-align: center; }
 .rows { margin: 0; display: grid; gap: 0; }
 .row {
   display: grid;
@@ -179,8 +185,45 @@ p { margin: 0; text-wrap: pretty; }
 .row:last-child { border-bottom: 0; }
 .row dt { margin: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); padding-top: 3px; }
 .row dd { margin: 0; }
-.signoff { display: grid; gap: 6px; justify-items: center; text-align: center; padding-top: 6px; }
+.signoff { display: grid; gap: 10px; justify-items: center; text-align: center; padding-top: 6px; }
+.cutie { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 8.5vw, 2.4rem); line-height: 1.1; text-wrap: balance; }
 .sig { font-family: var(--font-display); font-style: italic; font-size: 1.75rem; color: var(--gold); }
+
+/* cats */
+.cat-btn { background: none; border: 0; padding: 0; cursor: pointer; display: block; touch-action: manipulation; border-radius: 16px; }
+.cat-btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 4px; }
+.cat-svg { width: min(200px, 56vw); height: auto; display: block; overflow: visible; }
+.cat-end .cat-svg { width: min(150px, 44vw); }
+.bubble {
+  min-height: 2.9em;
+  max-width: 28ch;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(224, 181, 106, 0.16);
+  color: var(--gold);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  display: grid;
+  align-items: center;
+}
+.parade { display: flex; justify-content: center; gap: 10px; font-size: 1.9rem; line-height: 1; }
+.parade span { display: inline-block; animation: hop 0.55s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.18s); }
+.runner { position: fixed; left: 0; bottom: 6px; font-size: 2.2rem; line-height: 1; pointer-events: none; z-index: 5; animation: run 14s linear infinite; transform: translateX(110vw); }
+.runner.r2 { bottom: 34px; font-size: 1.7rem; animation-duration: 20s; animation-delay: -9s; }
+.runner span { display: inline-block; animation: hop 0.3s ease-in-out infinite alternate; }
+
+.cat-sway { transform-origin: 110px 228px; animation: sway 1s ease-in-out infinite alternate; }
+.cat-bob { animation: bob 0.5s ease-in-out infinite alternate; }
+.cat-head { transform-origin: 110px 125px; animation: tilt 1s ease-in-out infinite alternate; }
+.arm-l { transform-origin: 78px 142px; animation: armL 0.5s ease-in-out infinite alternate; }
+.arm-r { transform-origin: 142px 142px; animation: armR 0.5s ease-in-out infinite alternate; }
+.leg-l { transform-origin: 92px 190px; animation: legL 0.5s ease-in-out infinite alternate; }
+.leg-r { transform-origin: 128px 190px; animation: legR 0.5s ease-in-out infinite alternate; }
+.tail { transform-origin: 146px 182px; animation: tail 0.7s ease-in-out infinite alternate; }
+.pupil { animation: pupil 0.6s ease-in-out infinite alternate; }
+.tongue { transform-origin: 110px 109px; animation: blep 0.5s ease-in-out infinite alternate; }
+.shadow { transform-origin: 110px 230px; animation: shadow 0.5s ease-in-out infinite alternate; }
+.cat-btn:active .cat-svg { transform: scale(0.96) rotate(-3deg); }
 
 canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
 
@@ -190,12 +233,26 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
   0%, 100% { box-shadow: 0 0 0 0 rgba(224, 181, 106, 0.55); }
   50% { box-shadow: 0 0 0 12px rgba(224, 181, 106, 0); }
 }
+@keyframes hop { from { transform: translateY(0) rotate(-10deg); } to { transform: translateY(-12px) rotate(10deg); } }
+@keyframes run { from { transform: translateX(110vw); } to { transform: translateX(-90px); } }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+@keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes tilt { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+@keyframes armL { from { transform: rotate(-35deg); } to { transform: rotate(30deg); } }
+@keyframes armR { from { transform: rotate(35deg); } to { transform: rotate(-30deg); } }
+@keyframes legL { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+@keyframes legR { from { transform: rotate(14deg); } to { transform: rotate(-14deg); } }
+@keyframes tail { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+@keyframes pupil { from { transform: translate(-3px, 1px); } to { transform: translate(3px, -1px); } }
+@keyframes blep { from { transform: scaleY(0.8); } to { transform: scaleY(1.3); } }
+@keyframes shadow { from { transform: scaleX(1); } to { transform: scaleX(0.8); } }
 @media (prefers-reduced-motion: reduce) {
-  .rise, .btn-yes { animation: none; }
+  .rise, .btn-yes, .parade span, .runner, .runner span,
+  .cat-sway, .cat-bob, .cat-head, .arm-l, .arm-r, .leg-l, .leg-r, .tail, .pupil, .tongue, .shadow { animation: none; }
+  .runner { display: none; }
   .btn { transition: none; }
 }
 </style>
-
 </head>
 <body>
 <main class="card">
@@ -203,64 +260,126 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
   <div class="inner">
 
     <section class="step" id="s-ask">
-      <p class="eyebrow">Official notice &middot; Month 5</p>
-      <h1>You are being taken on <em>a date.</em></h1>
-      <p class="lede">This Saturday. I have a plan, a place, and zero intention of telling you where yet.</p>
-      <p class="question">Do you accept?</p>
+      <button class="cat-btn" id="cat" type="button" aria-label="Tap the dancing cat">
+        <svg class="cat-svg" viewBox="0 -16 220 256" role="img" aria-label="A cat in a party hat, dancing">
+          <ellipse class="shadow" cx="110" cy="230" rx="52" ry="7" fill="rgba(0,0,0,0.35)"/>
+          <g class="cat-sway"><g class="cat-bob">
+            <path class="tail" d="M146 182 C 196 184 210 124 178 108" fill="none" stroke="var(--fur)" stroke-width="15" stroke-linecap="round"/>
+            <rect class="leg-l" x="84" y="188" width="17" height="40" rx="8.5" fill="var(--fur)"/>
+            <rect class="leg-r" x="119" y="188" width="17" height="40" rx="8.5" fill="var(--fur)"/>
+            <ellipse cx="110" cy="162" rx="43" ry="46" fill="var(--fur)"/>
+            <ellipse cx="110" cy="170" rx="27" ry="35" fill="var(--belly)"/>
+            <path d="M70 150 h10 M70 164 h12 M150 150 h-10 M150 164 h-12" stroke="var(--fur-dark)" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path class="arm-l" d="M78 142 L46 108" fill="none" stroke="var(--fur)" stroke-width="15" stroke-linecap="round"/>
+            <path class="arm-r" d="M142 142 L174 108" fill="none" stroke="var(--fur)" stroke-width="15" stroke-linecap="round"/>
+            <g class="cat-head">
+              <path d="M64 66 L58 20 L98 48 Z" fill="var(--fur)"/>
+              <path d="M70 58 L66 34 L88 48 Z" fill="var(--pink)"/>
+              <path d="M156 66 L162 20 L122 48 Z" fill="var(--fur)"/>
+              <path d="M150 58 L154 34 L132 48 Z" fill="var(--pink)"/>
+              <ellipse cx="110" cy="88" rx="50" ry="44" fill="var(--fur)"/>
+              <path d="M110 46 v13 M98 48 l3 11 M122 48 l-3 11" stroke="var(--fur-dark)" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <ellipse cx="76" cy="102" rx="9" ry="6" fill="var(--pink)" opacity="0.55"/>
+              <ellipse cx="144" cy="102" rx="9" ry="6" fill="var(--pink)" opacity="0.55"/>
+              <circle cx="92" cy="82" r="15" fill="#fff" stroke="var(--ink)" stroke-width="2.5"/>
+              <circle cx="128" cy="82" r="12" fill="#fff" stroke="var(--ink)" stroke-width="2.5"/>
+              <circle class="pupil" cx="92" cy="85" r="7" fill="var(--ink)"/>
+              <circle class="pupil" cx="128" cy="85" r="5.5" fill="var(--ink)"/>
+              <path d="M104 97 h12 l-6 7 z" fill="var(--pink)"/>
+              <path class="tongue" d="M103 108 q7 17 14 0 z" fill="var(--tongue)"/>
+              <path d="M110 104 q-7 9 -16 3 M110 104 q7 9 16 3" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M82 98 L54 90 M82 103 L52 104 M138 98 L166 90 M138 103 L168 104" stroke="var(--belly)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <g transform="rotate(-12 110 50)">
+                <path d="M90 52 L110 -2 L130 52 Z" fill="var(--gold)"/>
+                <path d="M96 40 L124 40 M100 27 L120 27" stroke="var(--card)" stroke-width="4" fill="none"/>
+                <circle cx="110" cy="-2" r="7" fill="var(--pink)"/>
+              </g>
+            </g>
+          </g></g>
+        </svg>
+      </button>
+      <p class="bubble" id="bubble" aria-live="polite">Tap the cat, he has a lot to say.</p>
+      <p class="eyebrow">Month 5</p>
+      <h1>I'm taking you on <em>a date.</em></h1>
+      <p class="lede">This Saturday. I picked out a place but I'm not telling you where yet.</p>
+      <p class="question">&#128568; So... you in? &#128568;</p>
       <div class="actions">
         <button class="btn btn-yes" id="yes1" type="button">Yes</button>
-        <button class="btn btn-yes" id="yes2" type="button">Yes, obviously</button>
+        <button class="btn btn-yes" id="yes2" type="button">Duh, yes</button>
       </div>
-      <p class="fine">Fine print: there is no No button. Legal removed it.</p>
+      <p class="fine">There's no No button. The cat knocked it off the table.</p>
     </section>
 
     <section class="step" id="s-mystery" hidden>
-      <p class="eyebrow">She said yes</p>
-      <h2>Great choice. <em>Elite, even.</em></h2>
-      <p class="lede">Now the part you've been dying to know.</p>
+      <div class="parade" aria-hidden="true"><span style="--i:0">&#128049;</span><span style="--i:1">&#128568;</span><span style="--i:2">&#128008;</span><span style="--i:3">&#128571;</span><span style="--i:4">&#128576;</span></div>
+      <p class="eyebrow">Yesss</p>
+      <h2>I knew you'd say <em>yes.</em></h2>
+      <p class="lede">Even the cat is freaking out. Okay, here's where we're going.</p>
       <div class="ticket">
-        <span class="label">Mystery location</span>
+        <span class="label">&#128049; Mystery location &#128049;</span>
         <div class="place" id="place" aria-live="polite">? ? ? ? ?</div>
         <span class="town" id="town" hidden>Twinsburg, Ohio</span>
       </div>
       <button class="btn btn-yes" id="reveal" type="button">Reveal the location</button>
 
       <div class="details" id="details" hidden>
+        <p class="small">The cat gives it five out of five meows. &#128568;</p>
         <span class="when">Saturday, October 24</span>
-        <p class="small">I'll text you the time. Be ready before I'm outside, not after.</p>
+        <p class="small">I'll text you the time.</p>
         <a class="btn btn-ghost" id="maps" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=D%27Angelo%27s+Twinsburg+OH">Open in Maps</a>
-        <button class="btn btn-yes" id="wear" type="button">What do I wear?</button>
+        <button class="btn btn-yes" id="wear" type="button">What should I wear?</button>
       </div>
     </section>
 
     <section class="dress" id="s-dress" hidden>
       <div class="head">
-        <p class="eyebrow">Dress code</p>
-        <h3>Date-night <em>nice.</em></h3>
-        <p class="lede">It's an Italian dinner. Candlelight, not couch. Sweatpants are canceled for the night.</p>
+        <div class="parade" aria-hidden="true"><span style="--i:2">&#128570;</span><span style="--i:0">&#128572;</span><span style="--i:3">&#128049;</span><span style="--i:1">&#128573;</span><span style="--i:4">&#128569;</span></div>
+        <p class="eyebrow">What to wear</p>
+        <h3>A nice date <em>outfit.</em></h3>
+        <p class="lede">It's a nice Italian place, so dress up a little. No sweatpants, sorry.</p>
       </div>
       <dl class="rows">
-        <div class="row"><dt>Wear</dt><dd>A dress, or any outfit that makes you feel unreal. I'll be staring either way.</dd></div>
-        <div class="row"><dt>Shoes</dt><dd>Cute, but you'll be walking, sitting and eating pasta. Pick shoes that can handle all three.</dd></div>
-        <div class="row"><dt>Me</dt><dd>Dressed up too. I'll even iron something. Don't get used to it.</dd></div>
-        <div class="row"><dt>Bring</dt><dd>An appetite. Skipping lunch is allowed and encouraged.</dd></div>
-        <div class="row"><dt>Rule</dt><dd>Pics first, then phones down. You'll look too good not to take a few.</dd></div>
+        <div class="row"><dt>Wear</dt><dd>A dress, or whatever makes you feel good. I'm going to stare either way.</dd></div>
+        <div class="row"><dt>Shoes</dt><dd>Something cute that you can still walk in.</dd></div>
+        <div class="row"><dt>Me</dt><dd>I'll be dressed up too. I might even iron something.</dd></div>
+        <div class="row"><dt>The cat</dt><dd>He's wearing a tiny bow tie. You don't have to match him, but he'll be a little sad.</dd></div>
       </dl>
       <div class="signoff">
-        <p class="small">Screenshot this and send it to me so it's official.</p>
-        <p class="small">Happy 5 months!</p>
+        <p class="small">Screenshot this and send it to me so I know you saw it.</p>
+        <div class="cat-end" id="cat-end" aria-hidden="true"></div>
+        <div class="parade" aria-hidden="true"><span style="--i:0">&#128568;</span><span style="--i:1">&#128049;</span><span style="--i:2">&#128571;</span><span style="--i:3">&#128008;</span><span style="--i:4">&#128569;</span></div>
+        <p class="cutie">Happy 5 months cutie &#128571;</p>
         <p class="sig">Love, Logan &#10084;&#65039;</p>
       </div>
     </section>
 
   </div>
 </main>
+<div class="runner" aria-hidden="true"><span>&#128008;</span></div>
+<div class="runner r2" aria-hidden="true"><span>&#128049;</span></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
 <script>
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
+
+  /* tap the cat: he talks */
+  var lines = [
+    'Meow. That means yes.',
+    "I've been dancing for like three hours.",
+    'Just say yes, my legs hurt.',
+    'Prrrrrr.',
+    'I heard there will be pasta.',
+    "I'd say yes if I were you.",
+    'Hurry up, I need a nap.',
+    "He's been talking about you all week."
+  ];
+  var li = 0;
+  $('cat').addEventListener('click', function () {
+    $('bubble').textContent = lines[li % lines.length];
+    li++;
+  });
 
   function accept() {
     $('s-ask').hidden = true;
@@ -305,12 +424,21 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
   $('wear').addEventListener('click', function () {
     $('wear').hidden = true;
     var d = $('s-dress');
+    var end = $('cat-end');
+    if (!end.firstChild) {
+      var clone = document.querySelector('#cat .cat-svg').cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('role');
+      clone.removeAttribute('aria-label');
+      end.appendChild(clone);
+    }
     d.hidden = false;
     d.classList.add('rise');
     d.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
 
-  /* confetti in Italian flag colors, plus a few hearts */
+  /* confetti: Italian flag colors, hearts, and a lot of cats */
+  var cats = ['🐱', '😻', '🐈', '😸', '🙀', '😹', '😺', '😽'];
   function confetti() {
     if (reduce) return;
     var c = $('confetti');
@@ -323,6 +451,7 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
     var parts = [];
     function burst(n) {
       for (var i = 0; i < n; i++) {
+        var r = Math.random();
         parts.push({
           x: W / 2 + (Math.random() - 0.5) * 80,
           y: H * 0.55,
@@ -333,12 +462,12 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
           rot: Math.random() * 6,
           vr: (Math.random() - 0.5) * 0.4,
           color: colors[Math.floor(Math.random() * colors.length)],
-          heart: Math.random() < 0.12
+          emoji: r < 0.3 ? cats[Math.floor(Math.random() * cats.length)] : (r < 0.38 ? '❤️' : null)
         });
       }
     }
-    burst(110);
-    setTimeout(function () { burst(70); }, 350);
+    burst(120);
+    setTimeout(function () { burst(80); }, 350);
     var last = performance.now(), end = last + 4200;
     function tick(t) {
       var dt = Math.min((t - last) / 16.67, 2);
@@ -355,9 +484,9 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rot);
-        if (p.heart) {
-          ctx.font = '20px serif';
-          ctx.fillText('❤️', -10, 8);
+        if (p.emoji) {
+          ctx.font = '24px serif';
+          ctx.fillText(p.emoji, -12, 9);
         } else {
           ctx.fillStyle = p.color;
           ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
